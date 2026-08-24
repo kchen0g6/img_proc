@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div class="text-center">
+        <h1 class="display-4 mb-4">Hello</h1>
+        <p class="lead">
+          Thanks for trying out this application.
+          It runs locally on your machine so your data is yours.
+          You will provision resources on AWS via the Terraform file provided.
+          From there you will be able to perform image operations.
+          Your results will be stored in JSON and are downloadable.
+        </p>
+      </div>
+
+      <% if flash[:alert] %>
+        <div class="alert alert-danger mt-3"><%= flash[:alert] %></div>
+      <% end %>
+
+      <%# Comments: 
+          form_with url: jobs_path ---> outputs form tag and the form sends data to jobs_path
+          specified in route table. It sends the request as post 
+          multipart: true ---> send file bytes 
+          do |f| ---> f is the from builder objec you use to make fields 
+      %>
+
+      <%= form_with url: jobs_path, method: :post, multipart: true, class: "mt-4" do |f| %>
+        <div class="mb-3">
+          <%# 
+          Create upload box with f.file_filed and names it archive.
+          Allow it to accpet zip.
+
+          f.label uses the same name "arhive to attach title to the field.
+          %>
+
+          <%= f.label :archive, "Upload a Zip File Containing your Images", class: "form-label" %>
+          <%= f.file_field :archive, accept: ".zip", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :operation, "Select Operation on Images", class: "form-label" %>
+          <%= f.select :operation,
+                [["Extract text (OCR)", "ocr"], ["Compress", "compress"]],
+                {}, class: "form-select" %>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+          <%= f.submit "Begin Processing", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

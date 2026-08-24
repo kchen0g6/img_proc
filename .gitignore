@@ -1,0 +1,39 @@
+# ---- Rails ----
+app/.bundle/
+app/log/*
+app/tmp/*
+!app/log/.keep
+!app/tmp/.keep
+app/storage/
+app/storage/*.sqlite3*
+app/public/assets/
+app/node_modules/
+app/.env
+app/config/master.key
+app/config/credentials/*.key
+
+# ---- Go ----
+go_proc/dist/
+go_proc/bin/
+*.exe
+*.test
+*.out
+
+# ---- Terraform ----
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl
+crash.log
+
+# ---- Job output ----
+results/*
+!results/.gitkeep
+
+# ---- Local ----
+.env
+.DS_Store
+.idea/
+.vscode/
